@@ -1,0 +1,363 @@
+:root{
+    --default-text-color:black;
+    --primary-button-color:#6C40B5;
+    --title-text-color:#6C40B5;
+    --secondary-text-color:#666;
+
+    --error-message-color: red;
+
+    --content-color-a20: rgba(255,255,255,0.2);
+    --content-color-a40: rgba(255,255,255,0.4);
+    --content-border-color: rgba(255,255,255,0.5);
+
+    --fill-icon: rgba(0,0,0,0.5);
+    --icon-border: transparent;
+
+}
+
+[disp-theme = "dark"]{
+    --default-text-color:white;
+    --primary-button-color:#28124D;
+    --title-text-color:white;
+    --secondary-text-color:white;
+
+    --error-message-color: red;
+
+    --content-color-a20: rgba(0,0,0,0.2);
+    --content-color-a40: rgba(0,0,0,0.4);
+    --content-border-color: rgba(0,0,0,0.0);
+
+    --fill-icon: rgba(255,255,255,0.4);
+    --icon-border: rgba(255,255,255,0.4);
+
+}
+
+/*Master content*/
+.main-content{
+    max-width: 70%;
+    min-width: 480px;
+    margin: 0.3rem;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: center;
+    padding: 5px;
+}
+
+
+/*Search bar*/
+.search-bar{
+    width: 100%;
+    min-height: 40px;
+    height: 50px;
+    background-color: var(--content-color-a20);
+    padding: 5px 15px 5px 15px;
+    margin-right: 0.5rem;
+    text-align: left;
+}
+
+.search-bar input:focus{
+    outline: none;
+    border: 0;
+
+}
+
+.search-bar input:-webkit-autofill,
+.search-bar input:-webkit-autofill:hover, 
+.search-bar input:-webkit-autofill:focus, 
+.search-bar input:-webkit-autofill:active{
+    transition: background-color 5000s ease-in-out 0s;
+}    
+
+.search-bar-short{
+    border: 0;
+    min-width: 50px;
+    width: 15%;
+    height: 35px;
+    border-right: 2px solid var(--default-text-color);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.search-bar-long{
+    border: 0;
+    width: 75%;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.button-bar{
+    width:20%;
+    min-width: fit-content;
+    text-align: right;
+}
+
+.search-bar-button{
+    min-width: 40px;
+    min-height: 40px;
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+    margin-left: 15px;
+}
+
+.search-bar-button-icon-size{
+    min-width: 26px;
+    min-height: 26px;
+    max-width: 34px;
+    max-height: 34px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-primary-color{
+    background-color: var(--primary-button-color);
+}
+
+/*Content*/
+.content-bar{
+    background-color: var(--content-color-a20);
+    padding: 30px;
+    border: 1px solid var(--content-border-color);
+}
+
+.content-image-position{
+    position: absolute;
+    right: 0px;
+    top: -77px;
+}
+
+.content-image-icon{
+    height: 157px;
+}
+
+.content-details-bar{
+    width: 100%;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+
+.disp-flex-details-bar{
+    display: grid;
+    align-items: stretch;
+    width: 100%;
+}
+
+@media only screen and (min-device-width: 800px) {
+    .content-image-icon{
+        height: 300px;
+    }
+
+    .content-image-position{
+        position: absolute;
+        right: 0px;
+        top: -150px;
+    }
+
+    .disp-flex-details-bar{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+    }
+}
+
+.content-main-error{
+    text-align: center;
+    color: var(--error-message-color) !important;
+}
+
+/* History */
+.history-list ul{
+    list-style-type: none;
+    padding: 0;
+}
+
+.history-list li{
+    list-style: none;
+}
+
+.history-capsule{
+    background-color: var(--content-color-a40);
+    width: 100%;
+    max-height: 50px;
+    margin: 10px 0px 10px 0px;
+    padding: 10px 0px 10px 0px;
+}
+
+.history-capsule-button{
+    background-color: var(--content-color-a20);
+    border: 3px solid var(--icon-border);
+    min-width: 34px;
+    min-height: 34px;
+    width: 34px;
+    height: 34px;
+    padding: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.history-capsule-button-icon-size{
+    min-width: 16px;
+    min-height: 16px;
+    max-width: 16px;
+    max-height: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* utilities */
+.hidden{
+    display: none;
+    width: 0px;
+    height: 0px;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.disp-flex-wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+}
+
+.disp-flex-wrapper >.flex-right{
+    flex: 1;
+}
+
+.div-indent-1{
+    width: 100%;
+    margin-top: 15px;
+}
+
+.div-indent-10{
+    width: 100%;
+    margin-top: 150px;
+}
+
+.margin-indent{
+    margin-left:10px;
+    margin-right: 10px;;
+}
+
+.flex-1{
+    flex:1 0 auto;
+}
+
+.fill-white{
+    fill: white;
+}
+
+.fill-grey{
+    fill: var(--fill-icon);
+}
+
+.no-border{
+    border: 0;
+}
+
+.full-rounded-border{
+    border-radius: 100%;
+}
+
+.content-border-radius{
+    border-radius: 20px;
+}
+
+.sub-content-border-radius1{
+    border-radius: 24px;
+}
+
+.sub-content-border-radius2{
+    border-radius: 15px;
+}
+
+.sub-content-border-radius3{
+    border-radius: 16px;
+}
+
+@media only screen and (min-device-width: 600px){
+    .content-border-radius{
+        border-radius: 40px;
+    }
+
+    .sub-content-border-radius1{
+        border-radius: 24px;
+    }
+
+    .sub-content-border-radius2{
+        border-radius: 20px;
+    }
+
+    .sub-content-border-radius3{
+        border-radius: 16px;
+    }
+}
+
+.small-text{
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 10px;
+}
+
+.medium-text{
+    font-family: 'Noto Sans';
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--default-text-color);
+}
+
+.normal-text{
+    font-family: 'Noto Sans';
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--default-text-color);
+}
+
+.large-text{
+    font-family: Arial;
+    font-size: 80px;
+    font-weight: 600;
+    color: var(--title-text-color);
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+.light-grey{
+    color: var(--secondary-text-color);
+}
+
+.trasnsparent{
+    color: white;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: white;
+}
+
+.align-top-right{
+    text-align: right;
+    vertical-align: top;
+}
+
+.align-right{
+    text-align: right;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.pos-relative{
+    position: relative;
+}
+
+.center-margin{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.no-pointer-event{
+    pointer-events: none;
+}
