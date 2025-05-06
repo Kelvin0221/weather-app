@@ -3,6 +3,7 @@ import { format } from 'date-fns';
 
 import cloud from "./assets/weatherIcon/cloud.png";
 import sun from "./assets/weatherIcon/sun.png";
+import noWeather from "./assets/weatherIcon/error.png"
 
 import "./weather.css";
 import "./index.css";
@@ -52,23 +53,28 @@ function GetHistory(){
             const formattedDate = format(new Date(historyData.time), "dd-MM-yyyy hh:mm:ss a");
 
             history.push(
-                <li key={i+1} className="history-capsule sub-content-border-radius3 medium-text disp-flex-wrapper">
-                  <span className="center-margin margin-indent">{historyData.city}, {historyData.country}</span>
-                  <span className="align-right flex-right center-margin margin-indent">{formattedDate}</span>
-                  <span className="align-right">
-                    <button type="button" className="full-rounded-border history-capsule-button center-margin" onClick={(e) => searchHistory(e.target.value)} value={historyData.city+","+historyData.country}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="history-capsule-button-icon-size fill-grey no-pointer-event" viewBox="0 0 16 16">
+                <li key={i+1} className="history-capsule sub-content-border-radius3 medium-text disp-flex-wrapper w-100">
+                  <div className="flex-right history-detail-flex-wrapper">
+                    <span className="center-margin margin-indent">{historyData.city}, {historyData.country}</span>
+                    <span className="text-position center-margin margin-indent normal-sub-text">{formattedDate}</span>
+                  </div>
+                  <div className="float-right">
+                    <span className="align-right">
+                      <button type="button" className="full-rounded-border history-capsule-button center-margin" onClick={(e) => searchHistory(e.target.value)} value={historyData.city+","+historyData.country}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="history-capsule-button-icon-size fill-grey no-pointer-event v-align-mid" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                         </svg>
-                    </button>
-                  </span>
-                  <span className="align-right">
-                    <button type="button" id="btnDelete" className="full-rounded-border history-capsule-button center-margin" onClick={(e) => deleteHistory(e.target.value)} value={historyData.city}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="history-capsule-button-icon-size fill-grey no-pointer-event" viewBox="0 0 16 16">
+                      </button>
+                    </span>
+                    <span className="align-right">
+                     <button type="button" id="btnDelete" className="full-rounded-border history-capsule-button center-margin" onClick={(e) => deleteHistory(e.target.value)} value={historyData.city}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" className="history-capsule-button-icon-size fill-grey no-pointer-event v-align-mid" viewBox="0 0 16 16">
                             <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
                         </svg>
-                    </button>
-                </span>
+                      </button>
+                  </span>
+                  </div>
+
                 </li>);
             
         }
@@ -117,7 +123,7 @@ async function FetchWeatherData(lon, lat) {
 }
 
 function ShowWeatherData(weatherData, locationData){
-    if(locationData !== ""){
+    if(locationData !== "" && JSON.stringify(weatherData) !== "[]"){
         return (
         <>
         <div className="disp-flex-wrapper ">
@@ -148,7 +154,36 @@ function ShowWeatherData(weatherData, locationData){
             </div>
             </>);
     }else{
-        return (<div className="content-main-error large-text">Not Found!</div>);
+        //Error or initial state
+        return (
+            <>
+            <div className="disp-flex-wrapper ">
+                <div>
+                    <Title title={"Today's Weather"} />
+                    <div className="large-text">
+                        --°
+                    </div>
+                    <div className="normal-text">
+                        H: --° &nbsp;L: --°
+                    </div>
+                    <div className= "light-grey bold-text">
+                        No Location 
+                    </div>
+                </div>
+                <div className="flex-right pos-relative">
+                    <div className="align-top-right content-image-position">
+                        <img className="content-image-icon" src={noWeather}></img>
+                    </div>                
+                    <div className= "normal-text light-grey content-details-bar">
+                        <div className="disp-flex-details-bar">
+                            <span className="flex-1 align-right">Please enter valid location</span>
+                            <span className="flex-1 align-right">Humidity: --%</span>
+                            <span className="flex-1 align-right">--</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </>);
     }
 }
 
@@ -164,51 +199,50 @@ function SearchWeather(){
 
     const [darkMode, setDarkMode] = useState(false);
 
-    let locationName="";
 
+
+    //Run once on load, fetch history from LocalStorage
     useEffect(() =>{
         setDispHistory(GetHistory());
     }, []);
 
-    
-    async function searchWeather(e){
-        e.preventDefault();
-        //----BYPASS----
-        // addHistory();
+    useEffect( () =>{
+        async function fetchWeather() {
 
 
-        // //Pass to display & return
-        // let weatherDataA = require("./testdata.json");
-
-        // //setDispWeather(ShowWeatherData(weatherDataA, "Johor, MY"));
-        // setDispWeather(ShowWeatherData(weatherDataA, "Johor, MY", darkMode));
-
-
-        // return
-        //----BYPASS----
-
-        //Get FetchWeather from API
-        //Geocode (Get available city info)
-        setLocationResult(await FetchLocations({searchCity, searchCountry}));
-
-        //ASSUMPTION: User always know city name and country, so no list out multiple result. Index = 0
-        if(locationResult.length > 0 && searchCity !== "" && searchCountry !== ""){
+            if(locationResult.length > 0 ){
             //get data
+            //ASSUMPTION: User always know city name and country, so no list out multiple result. Index = 0
             setWeatherData(await FetchWeatherData(locationResult[0].lon, locationResult[0].lat));
-
-            if(weatherData !== null){
-                locationName = searchCity + ", " + searchCountry;
-
-                //Save to local storage
-                addHistory();
-
-                //Pass to display & return
-                setDispWeather(ShowWeatherData(weatherData, locationName, darkMode));
-            }
+            
         }else{
             //display no data
             setDispWeather( ShowWeatherData(null,"", darkMode));
+        } 
         }
+        fetchWeather();
+    }, [locationResult]);
+
+    useEffect( () =>{
+        async function applyWeather() {  
+            let locationName="";
+
+            if(weatherData !== null && searchCity !== "" && searchCountry !== ""){
+                locationName = searchCity + ", " + searchCountry;
+                //Save to local storage
+                addHistory();
+                //Pass to display & return
+                setDispWeather(ShowWeatherData(weatherData, locationName, darkMode));
+            }
+        }
+        applyWeather();
+    }, [weatherData]);
+    
+    async function searchWeather(e){
+        e.preventDefault();
+        //Get FetchWeather from API
+        //Geocode (Get available city info)
+        setLocationResult(await FetchLocations({searchCity, searchCountry}));
     };
 
     function clearSearch(e){

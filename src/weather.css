@@ -3,12 +3,14 @@
     --primary-button-color:#6C40B5;
     --title-text-color:#6C40B5;
     --secondary-text-color:#666;
+    --sub-text-color:black;
 
-    --error-message-color: red;
+    --error-message-color: rgb(25, 0, 255);
 
     --content-color-a20: rgba(255,255,255,0.2);
     --content-color-a40: rgba(255,255,255,0.4);
     --content-border-color: rgba(255,255,255,0.5);
+    --content-shadow-color: rgba(0,0,0,0.2);
 
     --fill-icon: rgba(0,0,0,0.5);
     --icon-border: transparent;
@@ -20,12 +22,14 @@
     --primary-button-color:#28124D;
     --title-text-color:white;
     --secondary-text-color:white;
+    --sub-text-color:rgba(255,255,255,0.5);
 
-    --error-message-color: red;
+    --error-message-color: rgb(25, 0, 255);;
 
     --content-color-a20: rgba(0,0,0,0.2);
     --content-color-a40: rgba(0,0,0,0.4);
     --content-border-color: rgba(0,0,0,0.0);
+    --content-shadow-color: rgba(0,0,0,0);
 
     --fill-icon: rgba(255,255,255,0.4);
     --icon-border: rgba(255,255,255,0.4);
@@ -119,16 +123,6 @@
     border: 1px solid var(--content-border-color);
 }
 
-.content-image-position{
-    position: absolute;
-    right: 0px;
-    top: -77px;
-}
-
-.content-image-icon{
-    height: 157px;
-}
-
 .content-details-bar{
     width: 100%;
     position: absolute;
@@ -142,17 +136,17 @@
     width: 100%;
 }
 
-@media only screen and (min-device-width: 800px) {
-    .content-image-icon{
-        height: 300px;
-    }
+.content-image-icon{
+    height: 300px;
+}
 
-    .content-image-position{
-        position: absolute;
-        right: 0px;
-        top: -150px;
-    }
+.content-image-position{
+    position: absolute;
+    right: 0px;
+    top: -150px;
+}
 
+@media only screen and (min-device-width: 200px) {
     .disp-flex-details-bar{
         display: flex;
         flex-direction: row;
@@ -184,9 +178,32 @@
     padding: 10px 0px 10px 0px;
 }
 
+.history-detail-flex-wrapper{
+    display: grid;
+    width: 100%;
+}
+
+.history-detail-flex-wrapper > .text-position{
+    text-align: left;
+}
+
+@media only screen and (min-device-width: 600px) {
+    .history-detail-flex-wrapper{
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        width: 100%;
+    }
+    
+    .history-detail-flex-wrapper >.text-position{
+        text-align: right;
+        flex: 1;
+    }
+}
+
 .history-capsule-button{
     background-color: var(--content-color-a20);
-    border: 3px solid var(--icon-border);
+    border: 2px solid var(--icon-border);
     min-width: 34px;
     min-height: 34px;
     width: 34px;
@@ -194,6 +211,7 @@
     padding: 0px;
     margin-left: 5px;
     margin-right: 5px;
+    box-shadow: 0px 0px 10px 0px var(--content-shadow-color);
 }
 
 .history-capsule-button-icon-size{
@@ -298,7 +316,7 @@
 
 .small-text{
     color: rgba(0, 0, 0, 0.4);
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .medium-text{
@@ -311,8 +329,38 @@
 .normal-text{
     font-family: 'Noto Sans';
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--default-text-color);
+}
+
+.normal-sub-text{
+    font-family: 'Noto Sans';
+    font-weight: 400;
+    font-size: 10px;
+    color: var(--sub-text-color);
+}
+
+@media only screen and (min-device-width: 600px){
+    .medium-text{
+        font-family: 'Noto Sans';
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--default-text-color);
+    }
+    
+    .normal-text{
+        font-family: 'Noto Sans';
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--default-text-color);
+    }
+    
+    .normal-sub-text{
+        font-family: 'Arial';
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--sub-text-color);
+    }
 }
 
 .large-text{
@@ -360,4 +408,12 @@
 
 .no-pointer-event{
     pointer-events: none;
+}
+
+.v-align-mid{
+    vertical-align: middle;
+}
+
+.float-right{
+    float: right;
 }
